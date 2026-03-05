@@ -1,0 +1,88 @@
+
+"""
+Game of adventures based on desicions made by the player.
+Changes:
+- 22-01-26: Initial version created with simple decision branches.
+- 23-01-26: Added more decision branches and outcomes.
+- 24-06-15: Refactored code for better readability and user experience.
+"""
+
+print("Welcome to the Adventure Game!\n")
+print("Choose your path into the next options:\nCLIMB, ENTER or WALK AWAY\n")
+
+choice = input("What would you like to do? ").upper()
+
+if choice == "CLIMB":
+    print("\nYou decided to climb the mountain and found a treasure chest!\n")
+    print("Do you want to OPEN the chest or LEAVE it?")
+    choice_climb = input("What would you like to do? ").upper()
+    if choice_climb == "OPEN":
+        print("\nYou opened the chest and found gold coins!\n")
+        print("Do you want to TAKE the gold or LEAVE it?")
+        choice_take = input("What would you like to do? ").upper()
+        if choice_take == "TAKE":
+            print("Congratulations! You win!")
+        elif choice_take == "LEAVE":
+            print("You left the gold behind and walked away safely.")
+        else:
+            print("\nInvalid choice. Game Over!")
+    elif choice_climb == "LEAVE":
+        print("\nYou left the chest behind and walked away safely.\n")
+        print("Do you want to CONTINUE or END your adventure?")
+        choice_continue = input("What would you like to do? ").upper()
+        if choice_continue == "CONTINUE":
+            print("\nYou continued your adventure and found a beautiful view from the mountain top!\n")
+            print("Congratulations! You win!")
+        elif choice_continue == "END":
+            print("\nYou ended your adventure and returned home safely.\n")
+            print("Game Over! You lose.")
+        else:
+            print("\nInvalid choice. Game Over!")
+    else:
+        print("\nInvalid choice. Game Over!")
+elif choice == "ENTER":
+    print("\nYou entered the dark cave and encountered a sleeping dragon.\n")
+    print("Do you want to STEAL the treasure or SNEAK away?")
+    choice_enter = input("What would you like to do? ").upper()
+    if choice_enter == "STEAL":
+        print("\nThe dragon woke up and caught you stealing!\n")
+        print("Do you want to FIGHT the dragon or RUN away?")
+        choice_fight = input("What would you like to do? ").upper()
+        if choice_fight == "FIGHT":
+            print("\nYou bravely fought the dragon and won!\n")
+            print("Congratulations! You win!")
+        elif choice_fight == "RUN":
+            print("\nYou ran away safely from the dragon.\n")
+            print("Game Over! You lose.")
+        else:
+            print("\nInvalid choice. Game Over!")
+    elif choice_enter == "SNEAK":
+        print("\nYou successfully sneaked away from the dragon and found a hidden exit!\n")
+        print("Do you want to EXPLORE the exit or LEAVE the cave?")
+        choice_exit = input("What would you like to do? ").upper()
+        if choice_exit == "EXPLORE":
+            print("\nYou explored the exit and found a secret passage leading to a treasure room!\n")
+            print("Congratulations! You win!")
+        elif choice_exit == "LEAVE":
+            print("\nYou left the cave safely and ended your adventure.\n")
+            print("Game Over! You lose.")
+        else:
+            print("\nInvalid choice. Game Over!")
+    else:
+        print("\nInvalid choice. Game Over!")
+elif choice == "WALK AWAY":
+    print("\nYou walked away from the adventure and missed out on potential treasures.\n")
+    print("Do you want to RECONSIDER or END your adventure?")
+    choice_walk_away = input("What would you like to do? ").upper()
+    if choice_walk_away == "RECONSIDER":
+        print("\nYou decided to give the adventure another try!\n")
+        print("Finishing the game here. Restart to play again!")
+    elif choice_walk_away == "END":
+        print("\nYou ended your adventure and returned home safely.\n")
+        print("Game Over! You lose.")
+    else:
+        print("\nInvalid choice. Game Over!")
+else:
+    print("\nInvalid choice. Game Over!")
+
+
