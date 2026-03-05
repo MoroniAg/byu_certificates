@@ -13,7 +13,7 @@
         }
     },
     "mounts": [
-        "source=/home/moroniaguilera/.ssh,target=/ssh,type=bind"
+        "source=/home/moroniaguilera/.ssh,target=/home/vscode/.ssh,type=bind"
     ],
     "postCreateCommand": "pip install --upgrade pip"
 }
