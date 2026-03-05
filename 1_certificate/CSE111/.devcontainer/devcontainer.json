@@ -12,5 +12,8 @@
             ]
         }
     },
+    "mounts": [
+        "source=/home/moroniaguilera/.ssh,target=/ssh,type=bind"
+    ],
     "postCreateCommand": "pip install --upgrade pip"
 }
