@@ -1,0 +1,16 @@
+{
+    "name": "Python 3 DevContainer",
+    "image": "mcr.microsoft.com/devcontainers/python:3",
+    "features": {},
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "python.defaultInterpreterPath": "/usr/local/bin/python3"
+            },
+            "extensions": [
+                "ms-python.python"
+            ]
+        }
+    },
+    "postCreateCommand": "pip install --upgrade pip"
+}
