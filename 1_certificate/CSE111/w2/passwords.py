@@ -37,8 +37,8 @@ def word_in_file(word, filename, case_sensitive):
     return False
 
 def word_has_character(word, character_list):
-    for ch in word:
-        if ch in character_list:
+    for character in word:
+        if character in character_list:
             return True
     return False
 
@@ -54,7 +54,7 @@ def word_complexity(word):
         score += 1
     return score
 
-def password_strength(password, min_length, strong_length):
+def password_strength(password, min_length=10, strong_length=15):
     if word_in_file(password, "wordlist.txt", case_sensitive=False):
         print("'Password is a dictionary word and is not secure.")
         return 0
@@ -73,12 +73,19 @@ def password_strength(password, min_length, strong_length):
 
     complexity = word_complexity(password)
     strength = 1 + complexity
-    print(f"Password strength (1+complexity): {strength}")
+    print(f"Password strength: {strength}")
     return strength
 
+def save_password_check(password, strength, filename="passwords_checks.txt"):
+    try:
+        from datetime import datetime
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        with open(filename, "a", encoding="utf-8") as fh:
+            fh.write(f"{timestamp},{password},{strength}\n")
+    except Exception as e:
+        print(f"Error saving to {filename}: {e}")
+
 def main():
-    min_length = 10
-    strong_length = 15
     print("|--------------------------------------|\n|   Welcome to the Password Strength Checker!   |\n|--------------------------------------|")
     while True:
         print("\n1) Input a password to check")
@@ -86,7 +93,11 @@ def main():
         option = input("Enter option (1 or 2): ").strip()
         if option == "1":
             password = input("Enter your password: ")
-            password_strength(password, min_length, strong_length)
+            strength = password_strength(password)
+            try:
+                save_password_check(password, strength)
+            except Exception:
+                print("Could not save password check result.")
         elif option == "2":
             print("Exiting password checker.")
             break
