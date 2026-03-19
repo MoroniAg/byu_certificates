@@ -20,7 +20,7 @@ UPPER=["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O"
 DIGITS=["0","1","2","3","4","5","6","7","8","9"]
 SPECIAL=["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "[", "]", "{", "}", "|", ";", ":", "'", "\"", ",", ".", "<", ">", "?", "/", "\\","`", "~"]
 
-def word_in_file(word, filename, case_sensitive):
+def word_in_file(word, filename, case_sensitive=False):
     
     try:
         with open(filename, "r", encoding="utf-8", errors="ignore") as fh:
@@ -54,7 +54,7 @@ def word_complexity(word):
         score += 1
     return score
 
-def password_strength(password, min_length=10, strong_length=15):
+def password_strength(password, min_length=10, strong_length=16):
     if word_in_file(password, "wordlist.txt", case_sensitive=False):
         print("'Password is a dictionary word and is not secure.")
         return 0
@@ -67,7 +67,7 @@ def password_strength(password, min_length=10, strong_length=15):
         print("Password is too short and is not secure.")
         return 1
 
-    if len(password) > strong_length:
+    if len(password) >= strong_length:
         print("Password is long, length trumps complexity this is a good password.")
         return 5
 
