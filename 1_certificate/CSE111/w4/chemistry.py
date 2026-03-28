@@ -1,4 +1,16 @@
+"""
+Program to compute the molar mass of a chemical compound from its chemical formula and the number of moles in a given mass of the compound.
 
+Author: Moroni Aguilera
+Changes:
+- 2026-03-26: add function make_periodic_table() to create a dictionary of chemical symbols, names, and atomic masses.
+- 2026-03-27: add function compute_molar_mass() to compute the molar mass of a compound from a list of chemical symbols and quantities and a periodic table dictionary.
+- 2026-03-27: add main program logic to prompt user for input, compute molar mass, and display results.
+- 2026-03-28: add additional functionality to print in a file the molar mass and number of moles for a given compound and mass, and allow the user to calculate multiple compounds in a single session.
+
+"""
+
+from formula import parse_formula 
 
 def make_periodic_table():
     periodic_table_dict = {
@@ -99,8 +111,35 @@ def make_periodic_table():
   }
     return periodic_table_dict
 
+def compute_molar_mass(symbol_quantity_list, periodic_table_dict):
+    total_mass = 0
+    for symbol, quantity in symbol_quantity_list:
+        if symbol in periodic_table_dict:
+            element_mass = periodic_table_dict[symbol][1]
+            total_mass += element_mass * quantity
+    return total_mass
+
+
+def save_historical_data(formula, molar_mass, number_moles):
+    with open("historical_data.txt", "a") as file:
+        file.write(f"{formula}: Molar Mass = {molar_mass:.5f} g/mol, Number of Moles = {number_moles:.5f} moles\n")
+
 def main():
-   print(make_periodic_table())
+  print("|-------------------------------------------------------------------------|\n| This program calculates the molar mass of a chemical compound.          | \n| It also calculates the number of moles in a given mass of the compound. | \n| You can enter any chemical formula,                                     | \n| and the program will compute the results for you.                       | \n|\tLet's get started!                                                | \n|-------------------------------------------------------------------------|")
+  while True:
+    formula = input("Enter the chemical formula of the compound: ")
+    size_grams = float(input("Enter the size of the sample in grams: "))
+    periodic_table = make_periodic_table()
+    parse_form = parse_formula(formula, periodic_table)
+    molar_mass = compute_molar_mass(parse_form, periodic_table)
+    print(f"The molar mass of {formula} is {molar_mass:.5f} grams/mole.")
+    number_moles = size_grams / molar_mass
+    print(f"The number of moles in {size_grams:.5f} grams of {formula} is {number_moles:.5f} moles.")
+    save_historical_data(formula, molar_mass, number_moles)
+    cont = input("\nDo you want to calculate another compound? (yes/no): ")
+    if cont.lower() != "yes":
+        break
+
 
 if __name__ == "__main__":
   main()    
