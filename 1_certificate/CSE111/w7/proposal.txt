@@ -1,0 +1,45 @@
+CSE 111 Proposal for a Student Chosen Program
+
+    (This is a proposal. All proposals are written with our best
+    knowledge at the beginning of a project. As we progress from the
+    beginning to the end of a project, we gain more knowledge, and we
+    change some of our proposed ideas. This is part of completing any
+    project and is fine.  However, we still must write a proposal so
+    that our teachers or supervisors know what we intend to do. Please
+    answer each of the following questions to the best of your
+    knowledge.)
+
+1. What is the title of your program?
+Disease Spread Simulation System
+
+2. What real-world problem will your program address or help to solve?
+This program simulates how an infectious disease spreads through a population over time. It helps analyze how variables such as infection probability and recovery time influence the progression of the disease. This type of simulation can be used to better understand contagion dynamics in a simplified environment.
+
+3. What will you learn from developing this program?
+I will learn how to structure a non-trivial Python program using multiple functions with clear responsibilities. I will also improve my ability to model real-world processes using logic and probability. Additionally, I will gain experience writing testable functions and validating them using pytest.
+
+4. What Python modules will your program use?
+Random
+Pytest
+Math
+csv
+
+5. List the names of functions you will need?
+initialize_population(size)
+infect_individual(population, index)
+spread_infection(population, infection_rate)
+update_recovery(population, recovery_time, infection_days)
+simulate_day(population, infection_rate, recovery_time, infection_days)
+count_states(population)
+run_simulation(days, population_size, infection_rate, recovery_time)
+update_infection_days(infection_days, population)
+get_user_parameters()
+display_results(results)
+
+6. List the names of the test functions you will write.
+test_initialize_population()
+test_infect_individual()
+test_spread_infection()
+test_count_states()
+test_update_recovery()
+
