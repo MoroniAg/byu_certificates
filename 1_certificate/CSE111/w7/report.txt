@@ -1,0 +1,37 @@
+Student Project Report
+
+Do the following:
+
+1. In the table below, list the dates, amount of time spent, and
+description of the work that you did on your project. Follow the example
+that is in the first row of the table below. Include the time you spent
+doing any of the following:
+    a. discussing your project with your teacher, tutor, or fellow students
+    b. researching by reading articles and watching applicable videos
+    c. designing your project by drawing diagrams and other applicable documents
+    d. writing experimental code
+    d. writing code for your project
+    e. writing test functions
+    f. debugging your code
+    g. any other activity that helped you complete your project
+
+=============Example====================
+                Time Spent
+    Date       (hours)   Description of Work
+----------  ----------  -------------------------
+2026-04-10      2.0     Planned project, drafted design and functions list
+2026-04-10      1.5     Researched disease models and CSV handling
+2026-04-11      3.0     Implemented `initialize_population` and CSV parsing
+2026-04-11      1.0     Implemented `spread_infection` and update functions
+2026-04-12      2.0     Implemented `run_simulation` and CLI interaction
+2026-04-12      1.5     Added `save_results_csv` and file-handling improvements
+2026-04-13      2.0     Wrote unit tests and test harness for core functions
+2026-04-13      1.0     Debugged edge cases and fixed CSV parsing bugs
+2026-04-14      2.0     Final testing, refactoring, and submission preparation
+=============Example====================
+
+
+
+2. In Canvas, submit this completed text file, your Python program, your
+Python test file, and any project data files such as .txt and .csv files and
+link to video walkthrough if needed.

@@ -74,16 +74,16 @@ def count_states(population):
 
 def spread_infection(population, infection_rate):
     infected_indices = [i for i, p in enumerate(population) if p['state'] == 'I']
-    if not infected_indices:
+    num_infected = len(infected_indices)
+    if num_infected == 0:
         return
     for person in population:
         if person['state'] != 'S':
             continue
-        for _ in infected_indices:
-            if random.random() < infection_rate:
-                person['state'] = 'I'
-                person['days_infected'] = 0
-                break
+        p_infected = 1 - math.pow(1 - infection_rate, num_infected)
+        if random.random() < p_infected:
+            person['state'] = 'I'
+            person['days_infected'] = 0
 
 
 def update_infection_days(population):
