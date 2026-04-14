@@ -56,7 +56,7 @@ def test_initialize_population_from_csv():
     csv_file = "sample_population.csv"
     population = initialize_population(str(csv_file))
     assert isinstance(population, list)
-    assert len(population) == 4
+    assert len(population) == 52
     assert population[1]['state'] == 'I' and population[1]['days_infected'] == 2
 
 
