@@ -4,49 +4,53 @@ import csv
 SEED_PROBLEM = 42
 
 
-def initialize_population(size, source='auto'):
+def initialize_population(size_or_path, source='auto'):
     if source not in ('auto', 'count', 'csv'):
         raise ValueError("source must be one of 'auto','count','csv'")
 
     if source == 'count':
         try:
-            n = int(size)
+            count = int(size_or_path)
         except Exception:
             raise TypeError('size must be an integer for source="count"')
-        return [{'state': 'S', 'days_infected': 0} for _ in range(n)]
+        return [{'state': 'S', 'days_infected': 0} for _ in range(count)]
 
     if source == 'auto':
-        if isinstance(size, str) and size.isdigit():
-            return [{'state': 'S', 'days_infected': 0} for _ in range(int(size))]
-        if isinstance(size, int):
-            return [{'state': 'S', 'days_infected': 0} for _ in range(size)]
+        if isinstance(size_or_path, str) and size_or_path.isdigit():
+            return [{'state': 'S', 'days_infected': 0} for _ in range(int(size_or_path))]
+        if isinstance(size_or_path, int):
+            return [{'state': 'S', 'days_infected': 0} for _ in range(size_or_path)]
 
-    filename = size
+    csv_filename = size_or_path
     population = []
     try:
-        with open(filename, newline='') as f:
-            reader = csv.reader(f)
-            rows = list(reader)
-            if not rows:
+        with open(csv_filename, "r", newline='') as file:
+            reader = csv.reader(file)
+            first_row = next(reader, None)
+            if first_row is None:
                 return population
-            first = [c.strip().lower() for c in rows[0]]
-            has_header = 'state' in first
-            start = 1 if has_header else 0
-            for row in rows[start:]:
+           
+            first_cell = first_row[0].strip().lower() if first_row and first_row[0] else ''
+            if not (first_cell in ('status', 'state')):
+                row = first_row
+                if row:
+                    state_value = row[0].strip() if len(row) > 0 else 'S'
+                    days_value = row[1].strip() if len(row) > 1 else '0'
+                    try:
+                        days_int = int(float(days_value))
+                    except Exception:
+                        days_int = 0
+                    population.append({'state': state_value, 'days_infected': days_int})
+            for row in reader:
                 if not row:
                     continue
-                if has_header:
-                    values = {h: v for h, v in zip(first, row)}
-                    state = values.get('state', 'S').strip() or 'S'
-                    days = values.get('days_infected', '0').strip() or '0'
-                else:
-                    state = row[0].strip() if len(row) > 0 else 'S'
-                    days = row[1].strip() if len(row) > 1 else '0'
+                state_value = row[0].strip() if len(row) > 0 else 'S'
+                days_value = row[1].strip() if len(row) > 1 else '0'
                 try:
-                    days_int = int(float(days))
+                    days_int = int(float(days_value))
                 except Exception:
                     days_int = 0
-                population.append({'state': state, 'days_infected': days_int})
+                population.append({'state': state_value, 'days_infected': days_int})
     except FileNotFoundError:
         raise
     return population
@@ -192,6 +196,13 @@ def main():
 
     results = run_simulation(params['days'], population_size=population_size, infection_rate=params['infection_rate'], recovery_time=params['recovery_time'], initial_infected=params['initial_infected'], population=population)
     display_results(results)
+    save_name = input("Enter filename to save results as CSV (leave blank to skip): ").strip()
+    if save_name:
+        try:
+            save_results_csv(results, save_name)
+            print(f"Results saved to {save_name}")
+        except Exception as e:
+            print(f"Failed to save results: {e}")
 
 
 
